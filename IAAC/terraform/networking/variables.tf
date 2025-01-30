@@ -21,9 +21,10 @@ variable RGWeb_location {
   default     = "East US"
   description = "Please provide the web RG location"
 }
-#As I have the requiement of creating the all subnets with approximately with same configuration, creating with map
+#As I have the requiement of creating the all subnets with approximately with same configuration.
+#and all subnet names are Azure spcific constant name, hence creating the subnets with the map.
 variable SubnetNamesAndAddressSpaces {
-  type        = map(string)
+  type        = map(list(string))
   default     = {
     "JumpServersSubnet" = ["10.47.0.0/24"],
     "AzureFirewallSubnet" = ["10.47.10.0/24"],
