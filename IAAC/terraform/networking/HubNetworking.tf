@@ -23,7 +23,7 @@ resource "azurerm_virtual_network_peering" "hubToSpokeOne" {
   remote_virtual_network_id = azurerm_virtual_network.spokeOneVnet.id
   allow_virtual_network_access = true
   allow_forwarded_traffic = true
-  depends_on = [azurerm_subnet.subnets[*],azurerm_subnet.spokeOnesubnets[*]]
+  depends_on = [azurerm_subnet.subnets,azurerm_subnet.spokeOnesubnets]
 }
 
 resource "azurerm_virtual_network_peering" "SpokeOneToHub" {
@@ -33,7 +33,7 @@ resource "azurerm_virtual_network_peering" "SpokeOneToHub" {
   remote_virtual_network_id = azurerm_virtual_network.vnetHub.id
   allow_virtual_network_access = true
   allow_forwarded_traffic = true
-  depends_on = [azurerm_subnet.subnets[*],azurerm_subnet.spokeOnesubnets[*]]
+  depends_on = [azurerm_subnet.subnets,azurerm_subnet.spokeOnesubnets]
 }
 
 #vnet Peering with Spoke Two
@@ -45,7 +45,7 @@ resource "azurerm_virtual_network_peering" "hubToSpokeTwo" {
   remote_virtual_network_id = azurerm_virtual_network.spokeTwoVnet.id
   allow_virtual_network_access = true
   allow_forwarded_traffic = true
-  depends_on = [azurerm_subnet.subnets[*],azurerm_subnet.spokeTwosubnets[*]]
+  depends_on = [azurerm_subnet.subnets,azurerm_subnet.spokeTwosubnets]
 }
 
 resource "azurerm_virtual_network_peering" "SpokeTwoToHub" {
@@ -55,5 +55,5 @@ resource "azurerm_virtual_network_peering" "SpokeTwoToHub" {
   remote_virtual_network_id = azurerm_virtual_network.vnetHub.id
   allow_virtual_network_access = true
   allow_forwarded_traffic = true
-  depends_on = [azurerm_subnet.subnets[*],azurerm_subnet.spokeTwosubnets[*]]
+  depends_on = [azurerm_subnet.subnets,azurerm_subnet.spokeTwosubnets]
 }
