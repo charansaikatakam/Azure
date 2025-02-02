@@ -28,7 +28,7 @@ resource "azurerm_virtual_network_peering" "hubToSpokeOne" {
 
 resource "azurerm_virtual_network_peering" "SpokeOneToHub" {
   name                      = "${var.env_prefix}-peering-spokeOne-to-Hub"
-  resource_group_name       = azurerm_resource_group.devRGHub.name
+  resource_group_name       = azurerm_resource_group.devSPOne.name
   virtual_network_name      = azurerm_virtual_network.spokeOneVnet.name
   remote_virtual_network_id = azurerm_virtual_network.vnetHub.id
   allow_virtual_network_access = true
@@ -40,7 +40,7 @@ resource "azurerm_virtual_network_peering" "SpokeOneToHub" {
 
 resource "azurerm_virtual_network_peering" "hubToSpokeTwo" {
   name                      = "${var.env_prefix}-peering-Hub-to-spokeTwo"
-  resource_group_name       = azurerm_resource_group.devRGHub.name
+  resource_group_name       = azurerm_resource_group.devSPTwo.name
   virtual_network_name      = azurerm_virtual_network.vnetHub.name
   remote_virtual_network_id = azurerm_virtual_network.spokeTwoVnet.id
   allow_virtual_network_access = true
