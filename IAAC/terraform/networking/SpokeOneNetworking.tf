@@ -19,7 +19,7 @@ resource "azurerm_subnet" "spokeOnesubnets" {
 
 resource "azurerm_network_security_group" "SpokeOneNSGVMS" {
   name                = "${local.NameExpSpokeOne}-NSG-For-VMs"
-  location            = azurerm_resource_group.spokeOneVnet.location
+  location            = azurerm_virtual_network.spokeOneVnet.location
   resource_group_name = azurerm_resource_group.devSPOne.name
 }
 

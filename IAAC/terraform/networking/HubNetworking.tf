@@ -66,7 +66,7 @@ resource "azurerm_virtual_network_peering" "SpokeTwoToHub" {
 
 resource "azurerm_network_security_group" "HubNSGVMS" {
   name                = "${local.NameExp}-NSG-For-VMs"
-  location            = azurerm_resource_group.vnetHub.location
+  location            = azurerm_virtual_network.vnetHub.location
   resource_group_name = azurerm_resource_group.devRGHub.name
 }
 

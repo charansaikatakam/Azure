@@ -21,7 +21,7 @@ resource "azurerm_subnet" "spokeTwosubnets" {
 
 resource "azurerm_network_security_group" "SpokeTwoNSGVMS" {
   name                = "${local.NameExpSpokeTwo}-NSG-For-VMs"
-  location            = azurerm_resource_group.spokeTwoVnet.location
+  location            = azurerm_virtual_network.spokeTwoVnet.location
   resource_group_name = azurerm_resource_group.devSPTwo.name
 }
 
