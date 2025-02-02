@@ -1,5 +1,5 @@
 locals {
-  NameExp = "${var.env_prefix}-SpokeOne"
+  NameExpSpokeOne = "${var.env_prefix}-SpokeOne"
 }
 
 resource "azurerm_virtual_network" "spokeOneVnet" {
@@ -18,13 +18,13 @@ resource "azurerm_subnet" "spokeOnesubnets" {
 }
 
 resource "azurerm_network_security_group" "SpokeOneNSGVMS" {
-  name                = "${local.NameExp}-NSG-For-VMs"
+  name                = "${local.NameExpSpokeOne}-NSG-For-VMs"
   location            = azurerm_resource_group.spokeOneVnet.location
   resource_group_name = azurerm_resource_group.devSPOne.name
 }
 
 resource "azurerm_network_security_rule" "SpokeOneNSGRULEVMSTCP" {
-  name                        = "${local.NameExp}-NSG-TCPRule-For-VMs"
+  name                        = "${local.NameExpSpokeOne}-NSG-TCPRule-For-VMs"
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allowing All Traffic For Now"
@@ -38,7 +38,7 @@ resource "azurerm_network_security_rule" "SpokeOneNSGRULEVMSTCP" {
 }
 
 resource "azurerm_network_security_rule" "SpokeOneNSGRULEVMSICMP" {
-  name                        = "${local.NameExp}-NSG-ICMPRule-For-VMs"
+  name                        = "${local.NameExpSpokeOne}-NSG-ICMPRule-For-VMs"
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allowing All Traffic For Now"

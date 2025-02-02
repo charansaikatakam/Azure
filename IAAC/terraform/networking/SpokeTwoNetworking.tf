@@ -1,5 +1,5 @@
 locals {
-  NameExp = "${var.env_prefix}-SpokeTwo"
+  NameExpSpokeTwo = "${var.env_prefix}-SpokeTwo"
 }
 
 resource "azurerm_virtual_network" "spokeTwoVnet" {
@@ -20,13 +20,13 @@ resource "azurerm_subnet" "spokeTwosubnets" {
 # security Group for EC2 instance - as this for testing purpose opening ports for everyone
 
 resource "azurerm_network_security_group" "SpokeTwoNSGVMS" {
-  name                = "${local.NameExp}-NSG-For-VMs"
+  name                = "${local.NameExpSpokeTwo}-NSG-For-VMs"
   location            = azurerm_resource_group.spokeTwoVnet.location
   resource_group_name = azurerm_resource_group.devSPTwo.name
 }
 
 resource "azurerm_network_security_rule" "SpokeTwoNSGRULEVMSTCP" {
-  name                        = "${local.NameExp}-NSG-TCPRule-For-VMs"
+  name                        = "${local.NameExpSpokeTwo}-NSG-TCPRule-For-VMs"
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allowing All Traffic For Now"
@@ -40,7 +40,7 @@ resource "azurerm_network_security_rule" "SpokeTwoNSGRULEVMSTCP" {
 }
 
 resource "azurerm_network_security_rule" "SpokeTwoNSGRULEVMSICMP" {
-  name                        = "${local.NameExp}-NSG-ICMPRule-For-VMs"
+  name                        = "${local.NameExpSpokeTwo}-NSG-ICMPRule-For-VMs"
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allowing All Traffic For Now"
