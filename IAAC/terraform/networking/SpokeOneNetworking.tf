@@ -1,3 +1,7 @@
+locals {
+  NameExp = "${var.env_prefix}-SpokeOne"
+}
+
 resource "azurerm_virtual_network" "spokeOneVnet" {
   name                = "${var.env_prefix}-vnet-spokeOne"
   location            = var.vnetSpokeOne_location
@@ -11,4 +15,38 @@ resource "azurerm_subnet" "spokeOnesubnets" {
   resource_group_name  = azurerm_resource_group.devSPOne.name
   virtual_network_name = azurerm_virtual_network.spokeOneVnet.name
   address_prefixes     = each.value
+}
+
+resource "azurerm_network_security_group" "SpokeOneNSGVMS" {
+  name                = "${local.NameExp}-NSG-For-VMs"
+  location            = azurerm_resource_group.spokeOneVnet.location
+  resource_group_name = azurerm_resource_group.devSPOne.name
+}
+
+resource "azurerm_network_security_rule" "SpokeOneNSGRULEVMSTCP" {
+  name                        = "${local.NameExp}-NSG-TCPRule-For-VMs"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allowing All Traffic For Now"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.devSPOne.name
+  network_security_group_name = azurerm_network_security_group.SpokeOneNSGVMS.name
+}
+
+resource "azurerm_network_security_rule" "SpokeOneNSGRULEVMSICMP" {
+  name                        = "${local.NameExp}-NSG-ICMPRule-For-VMs"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allowing All Traffic For Now"
+  protocol                    = "Icmp"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.devSPOne.name
+  network_security_group_name = azurerm_network_security_group.SpokeOneNSGVMS.name
 }
