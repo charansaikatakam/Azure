@@ -6,11 +6,35 @@ variable env_prefix {
 
 variable vnet_address_space {
   type        = list
-  default     = ["10.47.0.0/16"]
+  default     = ["10.46.0.0/16"]
   description = "Please provide the vnet address space"
 }
 
 variable vnetWeb_location {
+  type        = string
+  default     = "Australia East"
+  description = "Please provide the vnet location"
+}
+
+variable vnetSpokeOne_address_space {
+  type        = list
+  default     = ["10.47.0.0/16"]
+  description = "Please provide the vnet address space"
+}
+
+variable vnetSpokeOne_location {
+  type        = string
+  default     = "Australia East"
+  description = "Please provide the vnet location"
+}
+
+variable vnetSpokeTwo_address_space {
+  type        = list
+  default     = ["10.48.0.0/16"]
+  description = "Please provide the vnet address space"
+}
+
+variable vnetSpokeTwo_location {
   type        = string
   default     = "Australia East"
   description = "Please provide the vnet location"
@@ -26,11 +50,28 @@ variable RGWeb_location {
 variable SubnetNamesAndAddressSpaces {
   type        = map(list(string))
   default     = {
-    "JumpServersSubnet" = ["10.47.0.0/24"],
-    "AzureFirewallSubnet" = ["10.47.10.0/24"],
-    "AzureBastionSubnet" = ["10.47.20.0/24"],
-    "GatewaySubnet" = ["10.47.30.0/24"],
-    "PvtEndpointSubnet" = ["10.47.40.0/24"]
+    "JumpServersSubnet" = ["10.46.0.0/24"],
+    "AzureFirewallSubnet" = ["10.46.10.0/24"],
+    "AzureBastionSubnet" = ["10.46.20.0/24"],
+    "GatewaySubnet" = ["10.46.30.0/24"],
+    "PvtEndpointSubnet" = ["10.46.40.0/24"]
+  }
+  description = "Please provide the map of similar subnets address spaces and cidr ranges"
+}
+
+variable SpokeOneSubnetNamesAndAddressSpaces {
+  type        = map(list(string))
+  default     = {
+    "SpokeOneSubnet" = ["10.47.0.0/24"],
+  }
+  description = "Please provide the map of similar subnets address spaces and cidr ranges"
+}
+
+
+variable SpokeTwoSubnetNamesAndAddressSpaces {
+  type        = map(list(string))
+  default     = {
+    "SpokeTwoSubnet" = ["10.48.0.0/24"],
   }
   description = "Please provide the map of similar subnets address spaces and cidr ranges"
 }
