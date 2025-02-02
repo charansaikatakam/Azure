@@ -41,7 +41,7 @@ resource "azurerm_network_security_rule" "SpokeTwoNSGRULEVMSTCP" {
 
 resource "azurerm_network_security_rule" "SpokeTwoNSGRULEVMSICMP" {
   name                        = "${local.NameExpSpokeTwo}-NSG-ICMPRule-For-VMs"
-  priority                    = 100
+  priority                    = 101
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Icmp"

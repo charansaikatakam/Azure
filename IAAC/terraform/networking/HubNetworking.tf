@@ -86,7 +86,7 @@ resource "azurerm_network_security_rule" "HubNSGRULEVMSTCP" {
 
 resource "azurerm_network_security_rule" "HubNSGRULEVMSICMP" {
   name                        = "${local.NameExp}-NSG-ICMPRule-For-VMs"
-  priority                    = 100
+  priority                    = 101
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Icmp"
