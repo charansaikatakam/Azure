@@ -74,7 +74,7 @@ resource "azurerm_network_security_rule" "HubNSGRULEVMSTCP" {
   name                        = "${local.NameExp}-NSG-TCPRule-For-VMs"
   priority                    = 100
   direction                   = "Inbound"
-  access                      = "Allowing All Traffic For Now"
+  access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "*"
@@ -88,7 +88,7 @@ resource "azurerm_network_security_rule" "HubNSGRULEVMSICMP" {
   name                        = "${local.NameExp}-NSG-ICMPRule-For-VMs"
   priority                    = 100
   direction                   = "Inbound"
-  access                      = "Allowing All Traffic For Now"
+  access                      = "Allow"
   protocol                    = "Icmp"
   source_port_range           = "*"
   destination_port_range      = "*"

@@ -29,7 +29,7 @@ resource "azurerm_network_security_rule" "SpokeTwoNSGRULEVMSTCP" {
   name                        = "${local.NameExpSpokeTwo}-NSG-TCPRule-For-VMs"
   priority                    = 100
   direction                   = "Inbound"
-  access                      = "Allowing All Traffic For Now"
+  access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "*"
@@ -43,7 +43,7 @@ resource "azurerm_network_security_rule" "SpokeTwoNSGRULEVMSICMP" {
   name                        = "${local.NameExpSpokeTwo}-NSG-ICMPRule-For-VMs"
   priority                    = 100
   direction                   = "Inbound"
-  access                      = "Allowing All Traffic For Now"
+  access                      = "Allow"
   protocol                    = "Icmp"
   source_port_range           = "*"
   destination_port_range      = "*"
