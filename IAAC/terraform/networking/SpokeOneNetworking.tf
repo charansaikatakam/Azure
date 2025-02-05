@@ -68,6 +68,7 @@ resource "azurerm_public_ip" "NATGWPIP" {
   resource_group_name = azurerm_resource_group.devSPOne.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  zones               = ["1"]
 }
 
 resource "azurerm_nat_gateway_public_ip_association" "NAGGWPIPAssosciation" {
@@ -76,6 +77,6 @@ resource "azurerm_nat_gateway_public_ip_association" "NAGGWPIPAssosciation" {
 }
 
 resource "azurerm_subnet_nat_gateway_association" "NATGWSubnetAssosciation" {
-  subnet_id      = azurerm_subnet.spokeOnesubnets.id
+  subnet_id      = azurerm_subnet.spokeOnesubnets["SpokeOneSubnet"].id
   nat_gateway_id = azurerm_nat_gateway.NATGW.id
 }
