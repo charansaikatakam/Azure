@@ -50,3 +50,32 @@ resource "azurerm_network_security_rule" "SpokeOneNSGRULEVMSICMP" {
   resource_group_name         = azurerm_resource_group.devSPOne.name
   network_security_group_name = azurerm_network_security_group.SpokeOneNSGVMS.name
 }
+
+#Creating the NAT Gateway
+
+resource "azurerm_nat_gateway" "NATGW" {
+  name                    = "${local.NameExpSpokeOne}-nat-gateway"
+  location                = azurerm_virtual_network.spokeOneVnet.location
+  resource_group_name     = azurerm_resource_group.devSPOne.name
+  sku_name                = "Standard"
+  idle_timeout_in_minutes = 10
+  zones                   = ["1"]
+}
+
+resource "azurerm_public_ip" "NATGWPIP" {
+  name                = "${local.NameExpSpokeOne}-NAT-PIP"
+  location            = azurerm_virtual_network.spokeOneVnet.location
+  resource_group_name = azurerm_resource_group.devSPOne.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+resource "azurerm_nat_gateway_public_ip_association" "NAGGWPIPAssosciation" {
+  nat_gateway_id       = azurerm_nat_gateway.NATGW.id
+  public_ip_address_id = azurerm_public_ip.NATGWPIP.id
+}
+
+resource "azurerm_subnet_nat_gateway_association" "NATGWSubnetAssosciation" {
+  subnet_id      = azurerm_subnet.spokeOnesubnets.id
+  nat_gateway_id = azurerm_nat_gateway.NATGW.id
+}
