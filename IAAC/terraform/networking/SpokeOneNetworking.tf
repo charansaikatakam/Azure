@@ -54,6 +54,7 @@ resource "azurerm_network_security_rule" "SpokeOneNSGRULEVMSICMP" {
 #Creating the NAT Gateway
 
 resource "azurerm_nat_gateway" "NATGW" {
+  count = var.isNatGWRequired ? 1 : 0
   name                    = "${local.NameExpSpokeOne}-nat-gateway"
   location                = azurerm_virtual_network.spokeOneVnet.location
   resource_group_name     = azurerm_resource_group.devSPOne.name
@@ -63,6 +64,7 @@ resource "azurerm_nat_gateway" "NATGW" {
 }
 
 resource "azurerm_public_ip" "NATGWPIP" {
+  count = var.isNatGWRequired ? 1 : 0
   name                = "${local.NameExpSpokeOne}-NAT-PIP"
   location            = azurerm_virtual_network.spokeOneVnet.location
   resource_group_name = azurerm_resource_group.devSPOne.name
@@ -72,11 +74,13 @@ resource "azurerm_public_ip" "NATGWPIP" {
 }
 
 resource "azurerm_nat_gateway_public_ip_association" "NAGGWPIPAssosciation" {
-  nat_gateway_id       = azurerm_nat_gateway.NATGW.id
-  public_ip_address_id = azurerm_public_ip.NATGWPIP.id
+  count = var.isNatGWRequired ? 1 : 0
+  nat_gateway_id       = azurerm_nat_gateway.NATGW[0].id
+  public_ip_address_id = azurerm_public_ip.NATGWPIP[0].id
 }
 
 resource "azurerm_subnet_nat_gateway_association" "NATGWSubnetAssosciation" {
+  count = var.isNatGWRequired ? 1 : 0
   subnet_id      = azurerm_subnet.spokeOnesubnets["SpokeOneSubnet"].id
-  nat_gateway_id = azurerm_nat_gateway.NATGW.id
+  nat_gateway_id = azurerm_nat_gateway.NATGW[0].id
 }

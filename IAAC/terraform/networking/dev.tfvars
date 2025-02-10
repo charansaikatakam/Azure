@@ -19,5 +19,6 @@ SpokeOneSubnetNamesAndAddressSpaces = {
 
 SpokeTwoSubnetNamesAndAddressSpaces = {
     "SpokeTwoSubnet" = ["10.48.0.0/24"],
-  } 
+  }
+isNatGWRequired = false
 

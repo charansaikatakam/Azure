@@ -75,3 +75,9 @@ variable SpokeTwoSubnetNamesAndAddressSpaces {
   }
   description = "Please provide the map of similar subnets address spaces and cidr ranges"
 }
+
+variable isNatGWRequired {
+  type = bool
+  default = false
+  description = "if false, it will not create any private subnet"
+}
